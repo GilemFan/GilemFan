@@ -75,5 +75,27 @@ namespace GUI_Class_2026
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            double c = Double.Parse(textBox2.Text);
+            double f = (c)*(9/5.0) + 32;
+            label5.Text = f.ToString()+"F";
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
