@@ -16,10 +16,8 @@ namespace GUI_Class_2026
         public Form_Panel()
         {
             InitializeComponent();
-            File.WriteAllText("Temp.txt","我是第一行\n");
-            File.AppendAllText("Temp.txt","我是第二行\n");
-            String input = File.ReadAllText("Temp.txt");
-            MessageBox.Show(input);
+            if (!File.Exists("OrderData.csv"))
+                File.WriteAllText("OrderData.csv", "時間,主食,配菜,飲品,甜點\n", Encoding.UTF8);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -34,37 +32,75 @@ namespace GUI_Class_2026
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string mainFood = "";
-            string sideFood = "";
-            string drink = "";
-
-            foreach (Control c in panel2.Controls)
-            {
-                if (c is CheckBox)
-                {
-                    if (((CheckBox)c).Checked=true)
-                    {
-                        mainFood += c.Text+"";
-                    }
-
-                }
-
-            }
+            DateTime currenDate = DateTime.Now;
+            string formattedDateTime = currenDate.ToString("yyyyy/MM/dd HH:MM:ss");
+            string food = "", sideFood = "", drink = "", dessert = "";
 
             foreach (Control c in panel1.Controls)
             {
                 if (c is CheckBox)
                 {
-                    if (((CheckBox)c).Checked=true)
+                    CheckBox temp = (CheckBox)c;
+
+                    if (temp.Checked)
                     {
-                        sideFood += c.Text+"";
+                        food += " " + temp.Text;
+
                     }
-
                 }
-
             }
 
-            MessageBox.Show("主食:"+mainFood+Environment.NewLine+"\n配菜:"+sideFood);
+
+            foreach (Control c in panel2.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox temp = (CheckBox)c;
+
+                    if (temp.Checked)
+                    {
+                        sideFood += " " + temp.Text;
+                    }
+                }
+            }
+
+
+            foreach (Control c in panel3.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox temp = (CheckBox)c;
+
+                    if (temp.Checked)
+                    {
+                        dessert += " " + temp.Text;
+                    }
+                }
+            }
+
+
+            foreach (Control c in panel4.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    CheckBox temp = (CheckBox)c;
+
+                    if (temp.Checked)
+                    {
+                        drink += " " + temp.Text;
+                    }
+                }
+            }
+            MessageBox.Show("主食：" + food + "\n配菜：" + sideFood + "\n甜點：" + dessert + "\n飲料：" + drink);
+
+
+
+            File.AppendAllText("OrderData.csv", formattedDateTime + "," + food + "," + sideFood + "," + dessert + "," + drink+"\n");
+
+
+            {
+
+            }
         }
     }
 }
