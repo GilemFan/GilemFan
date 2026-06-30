@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace GUI_Class_2026
 {
@@ -15,6 +16,10 @@ namespace GUI_Class_2026
         public Form_Panel()
         {
             InitializeComponent();
+            File.WriteAllText("Temp.txt","我是第一行\n");
+            File.AppendAllText("Temp.txt","我是第二行\n");
+            String input = File.ReadAllText("Temp.txt");
+            MessageBox.Show(input);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -25,6 +30,41 @@ namespace GUI_Class_2026
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string mainFood = "";
+            string sideFood = "";
+            string drink = "";
+
+            foreach (Control c in panel2.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    if (((CheckBox)c).Checked=true)
+                    {
+                        mainFood += c.Text+"";
+                    }
+
+                }
+
+            }
+
+            foreach (Control c in panel1.Controls)
+            {
+                if (c is CheckBox)
+                {
+                    if (((CheckBox)c).Checked=true)
+                    {
+                        sideFood += c.Text+"";
+                    }
+
+                }
+
+            }
+
+            MessageBox.Show("主食:"+mainFood+Environment.NewLine+"\n配菜:"+sideFood);
         }
     }
 }

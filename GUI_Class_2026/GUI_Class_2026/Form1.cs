@@ -97,5 +97,11 @@ namespace GUI_Class_2026
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form form = new Form_Panel();
+            form.Show();
+        }
     }
 }
